@@ -42,3 +42,12 @@ export const signInController = async (req, res) => {
       res.status(500).json({ message: "Internal server error." });
     }
   };
+
+  export const verify = async (req, res) => {
+    return res.status(200).json({
+      success: true,
+      message: "User is logged in.",
+      user: req.user, // User details from the middleware
+    });
+  };
+
