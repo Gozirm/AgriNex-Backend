@@ -3,13 +3,13 @@ import ContactUs from "../models/contactUs.js";
 
 const submitContactForm = async (req, res) => {
     try {
-        const { firstName, lastName, email, message, phoneNumber } = req.body;
+        const { name, email, message, phoneNumber } = req.body;
 
-        if (!firstName || !lastName || !phoneNumber || !email || !message) {
+        if (!name ||  !phoneNumber || !email || !message) {
             return res.status(400).json({ error: "All fields are required." });
         }
 
-        const contact = new ContactUs({ firstName, lastName, email, message, phoneNumber });
+        const contact = new ContactUs({ name, email, message, phoneNumber });
         await contact.save();
 
         const transporter = nodemailer.createTransport({
@@ -29,7 +29,7 @@ const submitContactForm = async (req, res) => {
                 <div style="max-width: 600px; margin: auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px;">
                     <h2 style="color: #2e7d32; margin-bottom: 20px;">📩 New Contact Us Form Submission</h2>
                     
-                    <p style="font-size: 16px; color: #333;"><strong style="color: #2e7d32;">Name:</strong> ${firstName} ${lastName}</p>
+                    <p style="font-size: 16px; color: #333;"><strong style="color: #2e7d32;">Name:</strong> ${name} </p>
                     <p style="font-size: 16px; color: #333;"><strong style="color: #2e7d32;">Email:</strong> ${email}</p>
                     
                     <p style="font-size: 16px; color: #333;"><strong style="color: #2e7d32;">Message:</strong></p>
